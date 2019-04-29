@@ -1,0 +1,15 @@
+<% include ../pages/header %>
+
+
+<div class=" row well">
+            <div style="margin: 10px" class="row">
+                <a href="message/<%= message.id %>">
+                <img src="/assets/images/userdefault.png" alt="" class="col-lg-2">
+                </a>
+                <div class="col-lg-10" style="margin-top: 30px"><%= message.created_at.fromNow() %></div>
+                <label for="" class="col-lg-10"><%=message.content%></label>
+            </div>
+
+</div>
+
+<% include ../pages/footer %>

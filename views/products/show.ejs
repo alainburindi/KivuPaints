@@ -1,0 +1,38 @@
+<% include ../partials/messages%>
+<h3>Produits</h3>
+
+<table class="table table-hover" id="myTable">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Unite de mesure</th>
+      <th scope="col">Prix par unite</th>
+      <th scope="col">Detail</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if(products[0]){ %>
+    <% let i = 0;%>
+    <% for(product of products){%>
+    <% i++;%>
+    <tr class="table-<%= i % 2 == 0 ? 'secondary' : 'light' %>">
+      <th scope="row"><%= product.name%></th>
+      <td><%= product.unity%></td>
+      <td><%= product.price%></td>
+      <td width="500px"><%= product.detail%></td>
+
+      <td>
+        <a href="products/<%= product.id%>/edit" class="btn btn-outline-warning align-items-center">edit</a>
+        <p></p>
+        <a href="#" class="btn btn-outline-danger">delete</a>
+      </td>
+    </tr>
+    <%} %>
+    <%}else{%>
+    <h2>No product recorded</h2>
+    <%}%>
+    </tbody>
+  </table>
+  
+  

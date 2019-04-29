@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="/assets/semantic/semantic.min.css"> -->
+    <script src="/assets/bootstrap/js/bootstrap.js"></script>
+    <script src="/assets/bootstrap/js/jquery.min.js"></script>
+    <title>Acceuil</title>
+</head>
+<body>
+    <header class="row">
+        <div class="navbar navbar-inverse col-lg-12 navbar-static-top">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span style="color:white">Menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Site officiel</a>
+        </div>
+            <div class="collapse navbar-collapse" id="monMenu">
+            <!-- <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="index.php">ACCEUIL</a><li>
+            </ul> -->
+        </div>
+    </div>
+</header>
+    <div class="container">
+            <% if (locals.flash && locals.flash.error) {%>
+                <div class="alert alert-danger">
+                        <%= flash.error %>
+                </div>
+            <%}%>
+            <% if (locals.flash && locals.flash.success) {%>
+                <div class="alert alert-success">
+                        <%= flash.success %>
+                </div>
+            <%}%>
