@@ -14,13 +14,12 @@
   <tbody>
     <% if(products[0]){ %>
     <% let i = 0;%>
-    <% for(product of products){%>
-    <% i++;%>
+    <% for(; i < 30; i++){%>
     <tr class="table-<%= i % 2 == 0 ? 'secondary' : 'light' %>">
-      <th scope="row"><%= product.name%></th>
-      <td><%= product.unity%></td>
-      <td><%= product.price%></td>
-      <td width="500px"><%= product.detail%></td>
+      <th scope="row"><%= products[0].name%></th>
+      <td><%= products[0].unity%></td>
+      <td><%= products[0].price%></td>
+      <td width="500px"><%= products[0].detail%></td>
 
       <td>
         <a href="products/<%= product.id%>/edit" class="btn btn-outline-warning align-items-center">edit</a>

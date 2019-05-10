@@ -1,12 +1,12 @@
-import local from 'passport-local';
-const LocalStrategy = local.Strategy;
-import connection from './connection';
 import bcrypt from 'bcrypt';
+import local from 'passport-local';
+import connection from './connection';
+const LocalStrategy = local.Strategy;
 
 module.exports = (passport)=>{
     passport.use(
         new LocalStrategy({usernameField : 'email' }, (email, password, done)=> {
-            //check if email is already in use
+            //check if email exists
             const fetchAUser = "SELECT * FROM Users WHERE email = ?";
             connection.query(fetchAUser, [email], (err, result, fields) => {
                 if(err){

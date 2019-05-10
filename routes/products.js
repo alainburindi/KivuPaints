@@ -1,5 +1,4 @@
-import express from 'express'
-import bcrypt from 'bcrypt';
+import express from 'express';
 
 let connection = require('../config/connection');
 const router = express.Router();

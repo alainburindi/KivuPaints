@@ -46,5 +46,23 @@ app.use('/users', require('./routes/users'))
 app.use('/products', require('./routes/products'))
 
 const PORT = process.env.PORT || 500;   
+app.get('/josue', (req, res) => { 
+    res.json({
+        message : " this message"       
+    });
+});
+
+app.get('/users/{id}', (req, res) => {
+    res.json({
+        message : `the id intered is ${req.params.id}`
+    })
+})
+
+app.post('/users', (req, res) => {
+    res.json({
+        data : req.body
+    })
+})
+
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
