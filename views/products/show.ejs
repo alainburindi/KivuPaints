@@ -1,4 +1,4 @@
-<% include ../partials/messages%>
+<% include ../partials/navbar%> <% include ../partials/messages%>
 <h3>Produits</h3>
 
 <table class="table table-hover" id="myTable">
@@ -12,26 +12,29 @@
     </tr>
   </thead>
   <tbody>
-    <% if(products[0]){ %>
-    <% let i = 0;%>
-    <% for(; i < 30; i++){%>
+    <% if(products[0]){ %> <% let i = 0;%>
+    <!-- <%for(let a = 0; a < 150; a++){%>  -->
+    <%for(; i < products.length; i++){%>
     <tr class="table-<%= i % 2 == 0 ? 'secondary' : 'light' %>">
-      <th scope="row"><%= products[0].name%></th>
-      <td><%= products[0].unity%></td>
-      <td><%= products[0].price%></td>
-      <td width="500px"><%= products[0].detail%></td>
+      <th scope="row"><%= products[i].name%></th>
+      <td><%= products[i].unity%></td>
+      <td><%= products[i].price%></td>
+      <td width="500px"><%= products[i].detail%></td>
 
       <td>
-        <a href="products/<%= product.id%>/edit" class="btn btn-outline-warning align-items-center">edit</a>
+        <a
+          href="products/<%= products[i].id%>/edit"
+          class="btn btn-outline-warning align-items-center"
+          >edit</a
+        >
         <p></p>
         <a href="#" class="btn btn-outline-danger">delete</a>
       </td>
     </tr>
     <%} %>
+    <!-- <%i=0;%> <%} %>  -->
     <%}else{%>
     <h2>No product recorded</h2>
     <%}%>
-    </tbody>
-  </table>
-  
-  
+  </tbody>
+</table>

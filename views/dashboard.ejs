@@ -1,2 +1,103 @@
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    /* body{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:18px;
+	background-color:#CCC;
+} */
+
+    .float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 70px;
+        background-color: #0C9;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+    }
+
+    .my-float {
+        margin-top: 22px;
+    }
+</style>
 <% include ./partials/navbar%>
-<p class="lead mb-3">Welcome <%= user.name %></p>
+<% include ./partials/messages%>
+<table class="table table-hover" id="myTable">
+    <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Quantite</th>
+            <th scope="col">P.U</th>
+            <th scope="col">PT</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if(sales.length > 0){%>
+        <% for(sale of sales) {%>
+        <tr>
+            <th><%= sale.name %></th>
+            <th><%= sale.quantity %></th>
+            <th><%= sale.price %></th>
+            <th><%= sale.quantity * sale.price %></th>
+            <th><%= sale.date %></th>
+        </tr>
+        <%}%>
+    <%}%>
+    </tbody>
+</table>
+<a href="#" class="float">
+    <i class="fa fa-plus my-float" data-toggle="modal" data-target="#modalLoginForm"></i>
+</a>
+<form method="POST" action="products/sale" class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Vente</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <!-- <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="defaultForm-email" class="form-control validate">
+                </div> -->
+                <div class="md-form mb-4">
+                    <label data-error="wrong" data-success="right" for="defaultForm-email">Produit</label>
+                    <select class="form-control" id="select" name="product">
+                        <% for (const product of products){%>
+                        <option value="<%= product.id%>"><%= product.name%></option>
+                        <%}%>
+                    </select> 
+                </div>
+                <div class="md-form mb-4">
+                    <div class="form-group">
+                            <label class="control-label">Quantite</label>
+                              <div class="input-group mb-3">
+                                <input type="number" name="quantity" class="form-control" aria-label="" min="0" step=".01">
+                                <div class="input-group-append">
+                                  <span class="input-group-text">.00</span>
+                                </div>
+                              </div>
+                      </div>
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- <script src="/assets/mdb/mdb.js"></script> -->

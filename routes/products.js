@@ -1,5 +1,5 @@
 import express from 'express';
-
+import { ensureAuthenticated } from '../config/auth'
 let connection = require('../config/connection');
 const router = express.Router();
 
@@ -10,12 +10,13 @@ connection.query(getUnities, (err, result) => {
     unities = result;
 })
 
-router.get('/', (req, res, next) => {
+router.get('/', ensureAuthenticated, (req, res, next) => {
     const getProducts = "SELECT p.id, p.name, u.name as unity , p.price, p.detail FROM Products as p INNER JOIN Unities as u ON p.unity_id = u.id";
     connection.query(getProducts, (err, result) => {
         if (err) throw err;
         res.render('products/show', {
-            'products': result
+            'products': result,
+            'user': req.user
         });
     })
 });
@@ -84,10 +85,10 @@ router.post('/:id/update', (req, res, next) => {
     } else {
         const updateProduct = "UPDATE Products SET name = ?, unity_id = ?, price = ?, detail = ? WHERE id = ?";
         connection.query(updateProduct, [name, unity, price, detail, id], (err, result) => {
-            if(err) throw err;
-            if(result.changedRows == 1){
+            if (err) throw err;
+            if (result.changedRows == 1) {
                 req.flash('success_msg', 'Edited correctly');
-            }else{
+            } else {
                 req.flash('error_msg', 'Error while editing, try again later');
             }
             res.redirect('/products');
@@ -95,6 +96,20 @@ router.post('/:id/update', (req, res, next) => {
     }
 });
 
+router.post('/sale', (req, res, next) => {
+    const { product, quantity } = req.body;
 
+    if (!quantity || !product) {
+        req.flash('error_msg', 'please fill in all fields')
+        res.redirect(`/dashboard`);
+    } else {
+        const saveSale = "INSERT INTO Sales (product_id, quantity) VALUES (?,?)";
+        connection.query(saveSale, [product, quantity], (err, result) => {
+            if (err) throw err;
+            req.flash('success_msg', 'vente enregistree')
+            res.redirect(`/dashboard`);
+        });
+    }
+});
 
 module.exports = router;
