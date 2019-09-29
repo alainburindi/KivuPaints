@@ -46,6 +46,7 @@ app.use('/assets', express.static('public'));
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use('/products', require('./routes/products'));
+app.use('/expenses', require('./routes/depenses'));
 
 const PORT = process.env.PORT || 500;
 app.get('/josue', (req, res) => {
